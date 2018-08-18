@@ -53,7 +53,6 @@ extension MovieSearchCollectionViewManager: UICollectionViewDelegate
 {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        print("selected index: \(indexPath)")
         delegate?.movieSelected()
     }
 }
