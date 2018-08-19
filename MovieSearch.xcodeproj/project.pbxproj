@@ -12,6 +12,7 @@
 		AF0CA88D2128DA8D008CEA4A /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0CA88C2128DA8D008CEA4A /* MovieDetail.swift */; };
 		AF0CA88F2128E341008CEA4A /* Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0CA88E2128E341008CEA4A /* Parsing.swift */; };
 		AF0CA8922128E75A008CEA4A /* MovieApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0CA8912128E75A008CEA4A /* MovieApi.swift */; };
+		AF0CA8942128F36C008CEA4A /* MovieThumbNail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0CA8932128F36C008CEA4A /* MovieThumbNail.swift */; };
 		AFA22FF3212669790025E10C /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA22FF2212669790025E10C /* HomeScreenViewController.swift */; };
 		AFA22FF621266DEA0025E10C /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA22FF521266DEA0025E10C /* MovieDetailViewController.swift */; };
 		AFA22FF821266ED20025E10C /* SegueIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA22FF721266ED20025E10C /* SegueIdentifier.swift */; };
@@ -43,6 +44,7 @@
 		AF0CA88C2128DA8D008CEA4A /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		AF0CA88E2128E341008CEA4A /* Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parsing.swift; sourceTree = "<group>"; };
 		AF0CA8912128E75A008CEA4A /* MovieApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieApi.swift; sourceTree = "<group>"; };
+		AF0CA8932128F36C008CEA4A /* MovieThumbNail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieThumbNail.swift; sourceTree = "<group>"; };
 		AFA22FF2212669790025E10C /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		AFA22FF521266DEA0025E10C /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		AFA22FF721266ED20025E10C /* SegueIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueIdentifier.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				AF0CA88C2128DA8D008CEA4A /* MovieDetail.swift */,
+				AF0CA8932128F36C008CEA4A /* MovieThumbNail.swift */,
 				AF0CA88E2128E341008CEA4A /* Parsing.swift */,
 			);
 			path = Models;
@@ -291,6 +294,7 @@
 				AFA22FF821266ED20025E10C /* SegueIdentifier.swift in Sources */,
 				AF0CA88A2128D3CE008CEA4A /* Outcome.swift in Sources */,
 				AFA22FF621266DEA0025E10C /* MovieDetailViewController.swift in Sources */,
+				AF0CA8942128F36C008CEA4A /* MovieThumbNail.swift in Sources */,
 				AFE9120421266258003FD092 /* ReusableNib.swift in Sources */,
 				AFA22FF3212669790025E10C /* HomeScreenViewController.swift in Sources */,
 				AF0CA8922128E75A008CEA4A /* MovieApi.swift in Sources */,

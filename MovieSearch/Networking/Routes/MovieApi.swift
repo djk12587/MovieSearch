@@ -12,10 +12,20 @@ struct MovieApi { private init() {} }
 
 extension MovieApi
 {
+    struct SearchMovies: NetworkRouter
+    {
+        typealias ExpectedResponseModelType = MovieThumbNail
+        var titleSearch: String
+
+        var parameters: [String : Any]?
+        {
+            return ["s" : titleSearch]
+        }
+    }
+
     struct GetMovieDetail: NetworkRouter
     {
         typealias ExpectedResponseModelType = MovieDetail
-
         var imdbID: String
 
         var parameters: [String : Any]?

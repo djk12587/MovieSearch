@@ -26,7 +26,14 @@ extension Decodable
         do
         {
             let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            let jsonObjects: [ModelType] = try Self.array(from: json)
+            //an ugly hacky tweak to handle annoying json formatting from the API
+            var cleanedUpJson: Any?
+            if let searchArray = json as? JSON
+            {
+                cleanedUpJson = searchArray["Search"] ?? nil
+            }
+
+            let jsonObjects: [ModelType] = try Self.array(from: cleanedUpJson ?? json)
 
             return jsonObjects
         }
