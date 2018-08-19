@@ -13,18 +13,30 @@ let imageCache = NSCache<NSString, AnyObject>()
 
 extension UIImageView
 {
-    func imageFromURL(url: URL?, placeholder: UIImage = #imageLiteral(resourceName: "missing"))
+    func imageFromURL(url: URL?, placeholder: UIImage = #imageLiteral(resourceName: "missing")) -> URLSessionTask?
     {
-        guard let url = url else { image = placeholder; return }
+        guard let url = url else { image = placeholder; return nil }
 
         if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) as? UIImage {
             image = cachedImage
-            return
+            return nil
         }
 
         image = placeholder
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) -> Void in
-            guard error == nil else { return }
+
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) in
+
+            guard (error as NSError?)?.code != NSURLErrorCancelled, data != nil else
+            {
+                return
+            }
+
+            guard error == nil else
+            {
+                DispatchQueue.main.async { self.image = placeholder }
+                return
+            }
+
             DispatchQueue.main.async {
                 if let data = data, let image = UIImage(data: data)
                 {
@@ -37,6 +49,8 @@ extension UIImageView
                 }
             }
 
-        }).resume()
+        })
+        task.resume()
+        return task
     }
 }

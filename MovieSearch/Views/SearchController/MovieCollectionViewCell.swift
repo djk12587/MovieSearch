@@ -13,9 +13,12 @@ class MovieCollectionViewCell: UICollectionViewCell, ReusableNib
     @IBOutlet weak var moviePosterImageView: UIImageView!
     @IBOutlet weak var movieTitleLabel: UILabel!
 
+    var imageTask: URLSessionTask?
+
     func setUp(using movieThumbNail: MovieThumbNail)
     {
         movieTitleLabel.text = movieThumbNail.title
-        moviePosterImageView.imageFromURL(url: movieThumbNail.posterUrl)
+        imageTask?.cancel()
+        imageTask = moviePosterImageView.imageFromURL(url: movieThumbNail.posterUrl)
     }
 }

@@ -74,7 +74,6 @@ extension NetworkRouter
         guard let urlRequest = try? asURLRequest() else { return nil }
         let session = URLSession.shared
 
-
         let task = session.dataTask(with: urlRequest) { (data, urlResponse, error) in
 
             guard (error as NSError?)?.code != NSURLErrorCancelled, data != nil else
