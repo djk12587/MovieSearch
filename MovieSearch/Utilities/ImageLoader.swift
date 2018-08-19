@@ -13,16 +13,16 @@ let imageCache = NSCache<NSString, AnyObject>()
 
 extension UIImageView
 {
-    func imageFromURL(url: URL?)
+    func imageFromURL(url: URL?, placeholder: UIImage = #imageLiteral(resourceName: "missing"))
     {
-        guard let url = url else { image = nil; return }
+        guard let url = url else { image = placeholder; return }
 
         if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) as? UIImage {
             image = cachedImage
             return
         }
 
-        image = nil
+        image = placeholder
         URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) -> Void in
             guard error == nil else { return }
             DispatchQueue.main.async {
@@ -33,7 +33,7 @@ extension UIImageView
                 }
                 else
                 {
-                    self.image = nil
+                    self.image = placeholder
                 }
             }
 

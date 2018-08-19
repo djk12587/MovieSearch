@@ -36,10 +36,19 @@ extension HomeScreenViewController: UISearchResultsUpdating
 {
     func updateSearchResults(for searchController: UISearchController)
     {
-        guard let movieSearchText = searchController.searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), !movieSearchText.isEmpty else { return }
+        guard let movieSearchText = searchController.searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
 
         movieSearchTask?.cancel()
+        guard !movieSearchText.isEmpty else
+        {
+            (searchController.searchResultsController as? MovieSearchViewController)?.collectionViewManager.thumbNails = []
+            searchController.searchBar.isLoading = false
+            return
+        }
+
+        searchController.searchBar.isLoading = true
         movieSearchTask = MovieApi.SearchMovies(titleSearch: movieSearchText).request(completion: { (outcome) in
+            searchController.searchBar.isLoading = false
             switch outcome
             {
             case .success(let movieThumbNails):
@@ -56,6 +65,7 @@ extension HomeScreenViewController: MovieSearchCollectionViewManagerDelegate
 {
     func selected(movieThumbNail: MovieThumbNail)
     {
+        movieSearchTask?.cancel()
         performSegue(withIdentifier: MovieDetailViewController.segueId, sender: movieThumbNail)
     }
 }
