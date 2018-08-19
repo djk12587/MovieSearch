@@ -13,6 +13,7 @@ let imageCache = NSCache<NSString, AnyObject>()
 
 extension UIImageView
 {
+    @discardableResult
     func imageFromURL(url: URL?, placeholder: UIImage = #imageLiteral(resourceName: "missing")) -> URLSessionTask?
     {
         guard let url = url else { image = placeholder; return nil }
