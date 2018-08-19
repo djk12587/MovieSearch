@@ -73,10 +73,15 @@ extension NetworkRouter
         guard let urlRequest = try? asURLRequest() else { return nil }
         let session = URLSession.shared
 
+
         let task = session.dataTask(with: urlRequest) { (data, urlResponse, error) in
-            guard let responseData = data else { completion(.failure(NetworkResponse.noData)); return }
-            guard let parsedModels: [ExpectedResponseModelType] = try? ExpectedResponseModelType.array(from: responseData) else { completion(.failure(NetworkResponse.unableToDecode)); return }
-            completion(.success(parsedModels))
+            guard let responseData = data else { DispatchQueue.main.async(execute: { completion(.failure(NetworkResponse.noData)) }); return }
+            guard let parsedModels: [ExpectedResponseModelType] = try? ExpectedResponseModelType.array(from: responseData) else
+            {
+                DispatchQueue.main.async(execute: { completion(.failure(NetworkResponse.unableToDecode )) })
+                return
+            }
+            DispatchQueue.main.async(execute: { completion(.success(parsedModels)) })
         }
 
         task.resume()
