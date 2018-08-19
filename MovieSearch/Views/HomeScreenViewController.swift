@@ -48,13 +48,14 @@ extension HomeScreenViewController: UISearchResultsUpdating
 
         searchController.searchBar.isLoading = true
         movieSearchTask = MovieApi.SearchMovies(titleSearch: movieSearchText).request(completion: { (outcome) in
-            searchController.searchBar.isLoading = false
             switch outcome
             {
             case .success(let movieThumbNails):
+                searchController.searchBar.isLoading = false
                 (searchController.searchResultsController as? MovieSearchViewController)?.collectionViewManager.thumbNails = movieThumbNails
             case .failure(let error):
                 guard let networkResponseError = error as? NetworkResponse, networkResponseError != .cancelled else { return }
+                searchController.searchBar.isLoading = false
                 (searchController.searchResultsController as? MovieSearchViewController)?.collectionViewManager.thumbNails = []
             }
         })
