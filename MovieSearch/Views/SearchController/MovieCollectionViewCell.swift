@@ -12,4 +12,9 @@ class MovieCollectionViewCell: UICollectionViewCell, ReusableNib
 {
     @IBOutlet weak var moviePosterImageView: UIImageView!
     @IBOutlet weak var movieTitleLabel: UILabel!
+
+    func setUp(using movieThumbNail: MovieThumbNail)
+    {
+        movieTitleLabel.text = movieThumbNail.title
+    }
 }

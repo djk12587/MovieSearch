@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct MovieDetail
+struct MovieDetail: MoviePosterUrl
 {
     let imdbId: String
     let plot: String
     let year: String
     let title: String
-    let posterUrl: String
+    let posterUrlString: String
     let rating: String
 }
 
@@ -26,7 +26,7 @@ extension MovieDetail: Decodable
         case plot = "Plot"
         case year = "Year"
         case title = "Title"
-        case posterUrl = "Poster"
+        case posterUrlString = "Poster"
         case rating = "Metascore"
     }
 
@@ -38,7 +38,7 @@ extension MovieDetail: Decodable
         plot = try movieContainer.decode(String.self, forKey: .plot)
         year = try movieContainer.decode(String.self, forKey: .year)
         title = try movieContainer.decode(String.self, forKey: .title)
-        posterUrl = try movieContainer.decode(String.self, forKey: .posterUrl)
+        posterUrlString = try movieContainer.decode(String.self, forKey: .posterUrlString)
         rating = try movieContainer.decode(String.self, forKey: .rating)
     }
 }

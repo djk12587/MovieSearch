@@ -21,6 +21,7 @@ enum NetworkResponse: Error
     case failed
     case noData
     case unableToDecode
+    case cancelled
 }
 
 protocol NetworkRouter
@@ -48,7 +49,7 @@ extension NetworkRouter
 
     func asURLRequest() throws -> URLRequest
     {
-        var queryItems = [URLQueryItem(name: "apikey", value: apiKey)]
+        var queryItems = [URLQueryItem(name: "apikey", value: apiKey), URLQueryItem(name: "type", value: "movie")]
 
         parameters?.forEach { (param) in
             queryItems.append(URLQueryItem(name: param.key, value: param.value as? String))
@@ -75,13 +76,25 @@ extension NetworkRouter
 
 
         let task = session.dataTask(with: urlRequest) { (data, urlResponse, error) in
-            guard let responseData = data else { DispatchQueue.main.async(execute: { completion(.failure(NetworkResponse.noData)) }); return }
-            guard let parsedModels: [ExpectedResponseModelType] = try? ExpectedResponseModelType.array(from: responseData) else
+
+            guard (error as NSError?)?.code != NSURLErrorCancelled, data != nil else
             {
-                DispatchQueue.main.async(execute: { completion(.failure(NetworkResponse.unableToDecode )) })
+                DispatchQueue.main.async { completion(.failure(NetworkResponse.cancelled)) }
                 return
             }
-            DispatchQueue.main.async(execute: { completion(.success(parsedModels)) })
+
+            guard let responseData = data else
+            {
+                DispatchQueue.main.async { completion(.failure(NetworkResponse.noData)) }
+                return
+            }
+            guard let parsedModels: [ExpectedResponseModelType] = try? ExpectedResponseModelType.array(from: responseData) else
+            {
+                DispatchQueue.main.async { completion(.failure(NetworkResponse.unableToDecode )) }
+                return
+            }
+
+            DispatchQueue.main.async { completion(.success(parsedModels)) }
         }
 
         task.resume()

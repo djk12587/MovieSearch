@@ -8,12 +8,25 @@
 
 import Foundation
 
-struct MovieThumbNail
+protocol MoviePosterUrl
+{
+    var posterUrlString: String { get }
+}
+
+extension MoviePosterUrl
+{
+    var posterUrl: URL?
+    {
+        return URL(string: posterUrlString)
+    }
+}
+
+struct MovieThumbNail: MoviePosterUrl
 {
     let imdbId: String
     let year: String
     let title: String
-    let posterUrl: String
+    let posterUrlString: String
 }
 
 extension MovieThumbNail: Decodable
@@ -23,7 +36,7 @@ extension MovieThumbNail: Decodable
         case imdbId = "imdbID"
         case year = "Year"
         case title = "Title"
-        case posterUrl = "Poster"
+        case posterUrlString = "Poster"
     }
 
     init(from decoder: Decoder) throws
@@ -33,6 +46,6 @@ extension MovieThumbNail: Decodable
         imdbId = try movieThumbNailContainer.decode(String.self, forKey: .imdbId)
         year = try movieThumbNailContainer.decode(String.self, forKey: .year)
         title = try movieThumbNailContainer.decode(String.self, forKey: .title)
-        posterUrl = try movieThumbNailContainer.decode(String.self, forKey: .posterUrl)
+        posterUrlString = try movieThumbNailContainer.decode(String.self, forKey: .posterUrlString)
     }
 }

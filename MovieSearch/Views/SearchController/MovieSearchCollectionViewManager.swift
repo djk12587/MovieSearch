@@ -24,6 +24,14 @@ class MovieSearchCollectionViewManager: NSObject
     weak var collectionView: UICollectionView?
     weak var delegate: MovieSearchCollectionViewManagerDelegate?
 
+    var thumbNails: [MovieThumbNail] = []
+    {
+        didSet
+        {
+            collectionView?.reloadData()
+        }
+    }
+
     func setup(collectionView: UICollectionView?)
     {
         collectionView?.register(MovieCollectionViewCell.nib(), forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
@@ -39,12 +47,13 @@ extension MovieSearchCollectionViewManager: UICollectionViewDataSource
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return 50
+        return thumbNails.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as? MovieCollectionViewCell else { return UICollectionViewCell() }
+        cell.setUp(using: thumbNails[indexPath.row])
         return cell
     }
 }
