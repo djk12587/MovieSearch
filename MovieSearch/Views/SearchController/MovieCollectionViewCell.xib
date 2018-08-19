@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,14 +14,46 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCollectionViewCellID" id="gTV-IL-0wX" customClass="MovieCollectionViewCell" customModule="MovieSearch" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="150" height="300"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="150" height="300"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster" translatesAutoresizingMaskIntoConstraints="NO" id="5My-HM-KZj">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="215"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="5My-HM-KZj" secondAttribute="height" multiplier="30:43" id="zsW-So-zbf"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pe2-yP-x2R">
+                        <rect key="frame" x="8" y="223" width="134" height="69"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
             </view>
             <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="5My-HM-KZj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="1mu-Fu-Wr5"/>
+                <constraint firstItem="pe2-yP-x2R" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="CS4-Ht-u7t"/>
+                <constraint firstAttribute="trailing" secondItem="5My-HM-KZj" secondAttribute="trailing" id="Lka-Yf-EzM"/>
+                <constraint firstItem="5My-HM-KZj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="VCS-uQ-9wp"/>
+                <constraint firstAttribute="bottom" secondItem="pe2-yP-x2R" secondAttribute="bottom" constant="8" id="jPn-iK-XNQ"/>
+                <constraint firstItem="pe2-yP-x2R" firstAttribute="top" secondItem="5My-HM-KZj" secondAttribute="bottom" constant="8" id="l4L-0i-qkR"/>
+                <constraint firstAttribute="trailing" secondItem="pe2-yP-x2R" secondAttribute="trailing" constant="8" id="oMc-TE-GLe"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="188" height="489"/>
+            <connections>
+                <outlet property="moviePosterImageView" destination="5My-HM-KZj" id="0bB-RE-PZf"/>
+                <outlet property="movieTitleLabel" destination="pe2-yP-x2R" id="aqM-fH-xLV"/>
+            </connections>
+            <point key="canvasLocation" x="103" y="141"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="poster" width="300" height="429"/>
+    </resources>
 </document>

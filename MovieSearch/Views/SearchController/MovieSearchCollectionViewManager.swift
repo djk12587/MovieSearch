@@ -78,6 +78,6 @@ extension MovieSearchCollectionViewManager: UICollectionViewDelegateFlowLayout
     {
         let marginsAndInsets = inset * 2 + collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right + minimumInteritemSpacing * CGFloat(cellsPerRow - 1)
         let itemWidth = (collectionView.bounds.size.width - marginsAndInsets) / CGFloat(cellsPerRow).rounded(.down)
-        return CGSize(width: itemWidth, height: 200)
+        return CGSize(width: itemWidth, height: 240)
     }
 }
