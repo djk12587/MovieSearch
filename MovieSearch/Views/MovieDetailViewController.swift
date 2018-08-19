@@ -62,6 +62,7 @@ class MovieDetailViewController: UIViewController, SegueIdentifier
         movieTitleLabel.text = movieDetail.title
         movieRatingLabel.text = "Metacritic Score: " + movieDetail.rating
         moviePlotLabel.text = movieDetail.plot
+        moviePosterImageView.imageFromURL(url: movieDetail.posterUrl)
     }
 
     private func screenElements(shouldShow: Bool)

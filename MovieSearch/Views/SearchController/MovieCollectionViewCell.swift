@@ -16,5 +16,6 @@ class MovieCollectionViewCell: UICollectionViewCell, ReusableNib
     func setUp(using movieThumbNail: MovieThumbNail)
     {
         movieTitleLabel.text = movieThumbNail.title
+        moviePosterImageView.imageFromURL(url: movieThumbNail.posterUrl)
     }
 }
