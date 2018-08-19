@@ -16,6 +16,8 @@ class MovieDetailViewController: UIViewController, SegueIdentifier
     @IBOutlet weak var movieRatingLabel: UILabel!
     @IBOutlet weak var moviePlotLabel: UILabel!
 
+    var imdbId: String = ""
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -24,7 +26,7 @@ class MovieDetailViewController: UIViewController, SegueIdentifier
 
         screenElements(shouldShow: false)
 
-        MovieApi.GetMovieDetail(imdbID: "tt1981115").request { [weak self] (outcome) in
+        MovieApi.GetMovieDetail(imdbID: imdbId).request { [weak self] (outcome) in
             guard let strongSelf = self else { return }
             switch outcome
             {
@@ -58,7 +60,7 @@ class MovieDetailViewController: UIViewController, SegueIdentifier
         loadingIndicator.stopAnimating()
         screenElements(shouldShow: true)
         movieTitleLabel.text = movieDetail.title
-        movieRatingLabel.text = movieDetail.rating
+        movieRatingLabel.text = "Metacritic Score: " + movieDetail.rating
         moviePlotLabel.text = movieDetail.plot
     }
 

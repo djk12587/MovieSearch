@@ -25,13 +25,17 @@ class HomeScreenViewController: UIViewController
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        (segue.destination as? MovieDetailViewController)?.imdbId = (sender as? MovieThumbNail)?.imdbId ?? ""
+    }
 }
 
 extension HomeScreenViewController: UISearchResultsUpdating
 {
     func updateSearchResults(for searchController: UISearchController)
     {
-        searchController.searchResultsController?.view.isHidden = false
         guard let movieSearchText = searchController.searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), !movieSearchText.isEmpty else { return }
 
         movieSearchTask?.cancel()
@@ -41,7 +45,7 @@ extension HomeScreenViewController: UISearchResultsUpdating
             case .success(let movieThumbNails):
                 (searchController.searchResultsController as? MovieSearchViewController)?.collectionViewManager.thumbNails = movieThumbNails
             case .failure(let error):
-                guard let networkResponseError = error as? NetworkResponse, networkResponseError != .cancelled else { print("was cancelled!"); return }
+                guard let networkResponseError = error as? NetworkResponse, networkResponseError != .cancelled else { return }
                 (searchController.searchResultsController as? MovieSearchViewController)?.collectionViewManager.thumbNails = []
             }
         })
@@ -50,8 +54,8 @@ extension HomeScreenViewController: UISearchResultsUpdating
 
 extension HomeScreenViewController: MovieSearchCollectionViewManagerDelegate
 {
-    func movieSelected()
+    func selected(movieThumbNail: MovieThumbNail)
     {
-        performSegue(withIdentifier: MovieDetailViewController.segueId, sender: nil)
+        performSegue(withIdentifier: MovieDetailViewController.segueId, sender: movieThumbNail)
     }
 }

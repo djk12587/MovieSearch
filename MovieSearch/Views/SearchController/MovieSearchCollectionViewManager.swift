@@ -11,7 +11,7 @@ import UIKit
 
 protocol MovieSearchCollectionViewManagerDelegate: class
 {
-    func movieSelected()
+    func selected(movieThumbNail: MovieThumbNail)
 }
 
 class MovieSearchCollectionViewManager: NSObject
@@ -62,7 +62,8 @@ extension MovieSearchCollectionViewManager: UICollectionViewDelegate
 {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        delegate?.movieSelected()
+        guard indexPath.row < thumbNails.count else { return }
+        delegate?.selected(movieThumbNail: thumbNails[indexPath.row])
     }
 }
 
